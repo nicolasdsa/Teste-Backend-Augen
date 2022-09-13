@@ -5,8 +5,29 @@ class Model {
     this.tableName = tableName;
   }
 
-  selectModel(condition) {
-    return database.query(`SELECT * FROM ${this.tableName} ${condition}`);
+  select(condition) {
+    return database.query(`SELECT * FROM ${this.tableName} `);
+  }
+
+  selectId(id) {
+    return database.query(`SELECT * FROM ${this.tableName} WHERE Id = ${id} `);
+  }
+
+  insert(names, values) {
+    return database.query(
+      `INSERT INTO ${this.tableName} (${names}) VALUES (${values})`
+    );
+  }
+
+  Delete(id) {
+    return database.query(`DELETE FROM ${this.tableName} WHERE Id = ${id}`);
+  }
+
+  updateQuery(teste, id) {
+    console.log(`UPDATE ${this.tableName} SET ${teste} WHERE Id = ${id}`);
+    return database.query(
+      `UPDATE ${this.tableName} SET ${teste} WHERE Id = ${id}`
+    );
   }
 }
 

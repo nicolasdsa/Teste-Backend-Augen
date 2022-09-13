@@ -1,0 +1,33 @@
+const cidadeModel = require("../../models/cidade");
+const Joi = require("joi");
+
+const schema = Joi.object({
+  Nome: Joi.string().required().max(30),
+  Estado: Joi.string().required().max(30),
+});
+
+const route = async (req, res) => {
+  const { error, value } = schema.validate(req.body);
+
+  if (error) {
+    return res.status(400).send(error);
+  }
+
+  const padronizeData = Object.values(req.body).map((element) => {
+    return `"${element}"`;
+  });
+
+  const keysData = Object.keys(req.body);
+
+  let teste = [];
+
+  for (let i = 0; i < keysData.length; i++) {
+    teste.push(`${keysData[i]} = ${padronizeData[i]}`);
+  }
+
+  const update = await cidadeModel.update(teste, req.params.id);
+
+  return res.status(200).send("Confirmado");
+};
+
+module.exports = route;
