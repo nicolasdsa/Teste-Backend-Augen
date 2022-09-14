@@ -24,7 +24,6 @@ class Model {
   }
 
   updateQuery(teste, id) {
-    console.log(`UPDATE ${this.tableName} SET ${teste} WHERE Id = ${id}`);
     return database.query(
       `UPDATE ${this.tableName} SET ${teste} WHERE Id = ${id}`
     );
