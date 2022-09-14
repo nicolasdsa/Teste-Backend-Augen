@@ -1,0 +1,34 @@
+const analiseModel = require("../../models/analise");
+const Joi = require("joi");
+
+const schema = Joi.object({
+  PH: Joi.number().required(),
+  Cloro: Joi.number().required(),
+  Fluor: Joi.number().required(),
+  Vazao: Joi.number().required(),
+  EquipamentoId: Joi.number().required(),
+});
+
+const route = async (req, res) => {
+  const { error, value } = schema.validate(req.body);
+
+  if (error) {
+    return res.status(400).send(error);
+  }
+
+  const padronizeData = Object.values(value);
+
+  const keysData = Object.keys(req.body);
+
+  let teste = [];
+
+  for (let i = 0; i < keysData.length; i++) {
+    teste.push(`${keysData[i]} = ${padronizeData[i]}`);
+  }
+
+  const update = await analiseModel.update(teste, req.params.id);
+
+  return res.status(200).send("Confirmado");
+};
+
+module.exports = route;
