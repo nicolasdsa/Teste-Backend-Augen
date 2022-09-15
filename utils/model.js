@@ -28,6 +28,12 @@ class Model {
       `UPDATE ${this.tableName} SET ${teste} WHERE Id = ${id}`
     );
   }
+
+  selectEmail(Email) {
+    return database.query(
+      `SELECT * FROM ${this.tableName} WHERE Email = ${Email}`
+    );
+  }
 }
 
 module.exports = Model;
