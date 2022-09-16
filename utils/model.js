@@ -5,12 +5,8 @@ class Model {
     this.tableName = tableName;
   }
 
-  select(condition) {
-    return database.query(`SELECT * FROM ${this.tableName} `);
-  }
-
-  selectId(id) {
-    return database.query(`SELECT * FROM ${this.tableName} WHERE Id = ${id} `);
+  select(condition = "") {
+    return database.query(`SELECT * FROM ${this.tableName} ${condition}`);
   }
 
   insert(names, values) {
@@ -23,7 +19,7 @@ class Model {
     return database.query(`DELETE FROM ${this.tableName} WHERE Id = ${id}`);
   }
 
-  updateQuery(teste, id) {
+  update(teste, id) {
     return database.query(
       `UPDATE ${this.tableName} SET ${teste} WHERE Id = ${id}`
     );

@@ -5,24 +5,20 @@ class analiseModel extends Model {
     super("Analise");
   }
 
-  async create(names, values) {
+  async createQuery(names, values) {
     return this.insert(names, values);
   }
 
-  async list() {
-    return this.select();
+  async selectQuery(condition) {
+    return this.select(condition);
   }
 
-  async verify(id) {
-    return this.selectId(id);
-  }
-
-  async delete(id) {
+  async deleteQuery(id) {
     return this.Delete(id);
   }
 
-  async update(teste, id) {
-    return this.updateQuery(teste, id);
+  async updateQuery(teste, id) {
+    return this.update(teste, id);
   }
 }
 

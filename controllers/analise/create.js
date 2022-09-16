@@ -1,5 +1,7 @@
 const analiseModel = require("../../models/analise");
+const equipamentoModel = require("../../models/equipamento");
 const Joi = require("joi");
+const ApiError = require("../../utils/apiError");
 
 const schema = Joi.object({
   PH: Joi.number().required(),
@@ -13,14 +15,24 @@ const route = async (req, res) => {
   const { error, value } = schema.validate(req.body);
 
   if (error) {
-    return res.status(400).send(error);
+    throw ApiError.badRequest(error, {});
+  }
+
+  const verify = await equipamentoModel.selectQuery(req.body.EquipamentoId);
+
+  if (verify[0].length == 0) {
+    throw ApiError.NotFound("Este equipamento não existe.", {});
+  }
+
+  if (req.body.Vazao == 0 || req.body.Cloro > 100 || req.body.Fluor > 100) {
+    throw ApiError.badRequest("Valores fora do padrão aceito.", {});
   }
 
   const padronizeData = Object.values(value);
 
   const keysData = Object.keys(req.body);
 
-  const create = await analiseModel.create(keysData, padronizeData);
+  const create = await analiseModel.createQuery(keysData, padronizeData);
 
   return res.status(200).send("Confirmado");
 };

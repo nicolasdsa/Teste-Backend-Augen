@@ -1,7 +1,7 @@
 const analiseModel = require("../../models/analise");
 
 const route = async (req, res) => {
-  const list = await analiseModel.list();
+  const list = await analiseModel.selectQuery();
 
   return res.status(200).send({ ...list[0] });
 };

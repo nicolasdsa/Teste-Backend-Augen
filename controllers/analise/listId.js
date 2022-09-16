@@ -8,9 +8,9 @@ const route = async (req, res) => {
     throw ApiError.NotFound("Esta analise não existe.", {});
   }
 
-  const Delete = await analiseModel.deleteQuery(req.params.id);
+  const list = await analiseModel.selectQuery(`WHERE Id = ${req.params.id}`);
 
-  return res.status(200).send("Confirmado");
+  return res.status(200).send({ ...list[0] });
 };
 
 module.exports = route;
