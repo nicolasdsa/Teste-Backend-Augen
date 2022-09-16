@@ -1,16 +1,30 @@
 const cidadeModel = require("../../models/cidade");
 const Joi = require("joi");
+const ApiError = require("../../utils/apiError");
 
 const schema = Joi.object({
-  Nome: Joi.string().required().max(30),
-  Estado: Joi.string().required().max(30),
+  Nome: Joi.string().max(30),
+  Estado: Joi.string().max(30),
 });
 
 const route = async (req, res) => {
   const { error, value } = schema.validate(req.body);
 
   if (error) {
-    return res.status(400).send(error);
+    throw ApiError.badRequest(error, {});
+  }
+
+  const verify = await cidadeModel.selectQuery(`WHERE Id = ${req.params.id}`);
+
+  if (verify[0].length == 0) {
+    throw ApiError.NotFound("Esta cidade não existe.", {});
+  }
+
+  if (Object.keys(value).length === 0) {
+    throw ApiError.badRequest(
+      "Nenhum valor foi colocado para se atualizar.",
+      {}
+    );
   }
 
   const padronizeData = Object.values(req.body).map((element) => {
@@ -25,7 +39,7 @@ const route = async (req, res) => {
     teste.push(`${keysData[i]} = ${padronizeData[i]}`);
   }
 
-  const update = await cidadeModel.update(teste, req.params.id);
+  const update = await cidadeModel.updateQuery(teste, req.params.id);
 
   return res.status(200).send("Confirmado");
 };

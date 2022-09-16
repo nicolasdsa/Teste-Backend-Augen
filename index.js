@@ -11,7 +11,7 @@ server.use(bodyParser.json());
 
 server.listen(3000, async () => {
   await database.init();
-  console.log("alo");
+  console.log("Servidor Iniciado");
 });
 
 server.use("/cidade", cidadeRouter);

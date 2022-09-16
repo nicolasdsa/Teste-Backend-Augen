@@ -1,19 +1,44 @@
 const analiseModel = require("../../models/analise");
 const Joi = require("joi");
+const ApiError = require("../../utils/apiError");
+const equipamentoModel = require("../../models/equipamento");
 
 const schema = Joi.object({
-  PH: Joi.number().required(),
-  Cloro: Joi.number().required(),
-  Fluor: Joi.number().required(),
-  Vazao: Joi.number().required(),
-  EquipamentoId: Joi.number().required(),
+  PH: Joi.number(),
+  Cloro: Joi.number(),
+  Fluor: Joi.number(),
+  Vazao: Joi.number(),
+  EquipamentoId: Joi.number(),
 });
 
 const route = async (req, res) => {
   const { error, value } = schema.validate(req.body);
 
   if (error) {
-    return res.status(400).send(error);
+    throw ApiError.badRequest(error, {});
+  }
+
+  const verify = await analiseModel.selectQuery(`WHERE Id = ${req.params.id}`);
+
+  if (verify[0].length == 0) {
+    throw ApiError.NotFound("Esta analise não existe.", {});
+  }
+
+  if (Object.keys(value).length === 0) {
+    throw ApiError.badRequest(
+      "Nenhum valor foi colocado para se atualizar.",
+      {}
+    );
+  }
+
+  if (req.body.EquipamentoId) {
+    const verifyEquipamento = await equipamentoModel.selectQuery(
+      `WHERE Id = ${req.body.EquipamentoId}`
+    );
+
+    if (verifyEquipamento[0].length == 0) {
+      throw ApiError.NotFound("Este equipamento não existe.", {});
+    }
   }
 
   const padronizeData = Object.values(value);

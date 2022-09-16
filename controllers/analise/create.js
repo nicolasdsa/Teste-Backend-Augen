@@ -18,7 +18,9 @@ const route = async (req, res) => {
     throw ApiError.badRequest(error, {});
   }
 
-  const verify = await equipamentoModel.selectQuery(req.body.EquipamentoId);
+  const verify = await equipamentoModel.selectQuery(
+    `WHERE Id = ${req.body.EquipamentoId}`
+  );
 
   if (verify[0].length == 0) {
     throw ApiError.NotFound("Este equipamento não existe.", {});
