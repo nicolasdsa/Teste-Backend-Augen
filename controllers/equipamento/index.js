@@ -5,9 +5,9 @@ const list = require("./list");
 const update = require("./update");
 const Delete = require("./delete");
 
-router.post("/", create);
-router.get("/", list);
-router.delete("/:id", Delete);
-router.patch("/:id", update);
+router.post("/", routeMiddleware(create));
+router.get("/", routeMiddleware(list));
+router.delete("/:id", routeMiddleware(Delete));
+router.patch("/:id", routeMiddleware(update));
 
 module.exports = router;

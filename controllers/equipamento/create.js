@@ -1,4 +1,5 @@
 const equipamentoModel = require("../../models/equipamento");
+const ApiError = require("../../utils/apiError");
 const Joi = require("joi");
 
 const schema = Joi.object({

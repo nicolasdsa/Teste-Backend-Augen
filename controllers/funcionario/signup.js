@@ -1,5 +1,6 @@
 const Joi = require("joi");
 const AuthController = require("./auth");
+const ApiError = require("../../utils/apiError");
 
 const schema = Joi.object({
   Email: Joi.string().email().required(),
@@ -12,7 +13,7 @@ const route = async (req, res) => {
   const { error, value } = schema.validate(req.body);
 
   if (error) {
-    return res.status(400).send(error);
+    throw ApiError.badRequest(error, {});
   }
 
   const insertedId = await AuthController.signup(value);
