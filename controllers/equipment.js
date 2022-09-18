@@ -11,6 +11,10 @@ class EquipmentController {
         return list
     }
 
+    static async update(equipment, id){
+        return equipmentModel.updateById(equipment, id);
+    }
+
     static async findByCityId(cityId){
         return equipmentModel.findByCityId(cityId);
     }

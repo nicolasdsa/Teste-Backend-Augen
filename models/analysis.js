@@ -34,6 +34,13 @@ class AnalysisModel extends Model {
     return this.query(sql, params);
   }
 
+  async updateById(analysis, id){
+    const params = [analysis.ph ,analysis.chlorine, analysis.fluorine, analysis.output, analysis.equipment_id, id];
+    console.log(params)
+    const sql = `UPDATE ${this.tableName} SET ph = ?, chlorine = ?, fluorine = ?, output = ?, equipment_id = ? WHERE id = ?`;
+    return this.query(sql, params);
+  }
+
 }
 
 module.exports = new AnalysisModel();

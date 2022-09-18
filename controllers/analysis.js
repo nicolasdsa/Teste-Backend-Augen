@@ -10,6 +10,10 @@ class AnalysisController {
         return list
     }
 
+    static async update(analysis, id){
+        return analysisModel.updateById(analysis, id);
+    }
+
     static async findByEquipmentId(equipmentId){
         return analysisModel.findByEquipmentId(equipmentId);
     }

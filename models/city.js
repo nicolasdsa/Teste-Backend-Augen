@@ -29,8 +29,8 @@ class CityModel extends Model {
   }
 
   async updateById(city, id){
-    const params = [city.nome, city.estado, id];
-    const sql = `UPDATE ${this.tableName} SET nome = ?, estado = ? WHERE id = ?`;
+    const params = [city.name, city.state, id];
+    const sql = `UPDATE ${this.tableName} SET name = ?, state = ? WHERE id = ?`;
     return this.query(sql, params);
   }
 }

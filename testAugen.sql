@@ -28,7 +28,7 @@ create table analysis (
 create table user (
 	id int auto_increment, 
 	email varchar(30) not null,
-    password char(30) not null,
+    password char(200) not null,
     PRIMARY KEY(id)
 );
 

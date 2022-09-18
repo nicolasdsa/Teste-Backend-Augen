@@ -40,6 +40,12 @@ class EquipmentModel extends Model {
     return this.query(sql, params);
   }
 
+  async updateById(equipment, id){
+    const params = [equipment.name, equipment.city_id, id];
+    const sql = `UPDATE ${this.tableName} SET name = ?, city_id = ? WHERE id = ?`;
+    return this.query(sql, params);
+  }
+
 }
 
 module.exports = new EquipmentModel();

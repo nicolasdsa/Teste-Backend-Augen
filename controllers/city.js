@@ -10,8 +10,8 @@ class CityController {
         return list
     }
 
-    static async update(city){
-        return cityModel.update(city);
+    static async update(city, id){
+        return cityModel.updateById(city, id);
     }
 
     static async findById(id){
