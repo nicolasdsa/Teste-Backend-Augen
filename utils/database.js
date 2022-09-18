@@ -17,8 +17,8 @@ class DataBase {
     });
   }
 
-  async query(query) {
-    return await this.connection.execute(query);
+  async query(sql, params) {
+    return await this.connection.execute(sql, params);
   }
 }
 

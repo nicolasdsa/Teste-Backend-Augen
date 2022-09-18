@@ -1,37 +1,38 @@
 create schema testAugen;
 use testAugen;
 
-create table Equipamento (
-	Id int auto_increment,
-	Nome varchar(30) not null,
-	CidadeId int not null,
-	PRIMARY KEY(Id)
+create table equipments (
+	id int auto_increment,
+	name varchar(30) not null,
+	city_id int not null,
+	PRIMARY KEY(id)
 );
 
-create table Cidade (
-	Id int auto_increment, 
-	Nome varchar(30) not null,
-    Estado varchar(30) not null,
-	PRIMARY KEY(Id)
+create table cities (
+	id int auto_increment, 
+	name varchar(30) not null,
+    state varchar(30) not null,
+	PRIMARY KEY(id)
 );
 
-create table Analise (
-	Id int auto_increment,
-	PH float not null,
-	Cloro float not null,
-    Vazao float not null,
-    EquipamentoId int not null,
-	PRIMARY KEY(Id)
+create table analysis (
+	id int auto_increment,
+	ph float not null,
+	chlorine float not null,
+    fluorine float not null,
+    output float not null,
+    equipment_id int not null,
+	PRIMARY KEY(id)
 );
 
-create table Funcionario (
-	Email varchar(30) not null,
-    Senha char(30) not null
+create table user (
+	id int auto_increment, 
+	email varchar(30) not null,
+    password char(30) not null,
+    PRIMARY KEY(id)
 );
 
-alter table Funcionario add primary key(Email);
-
-alter table Analise add foreign key (EquipamentoId) references Equipamento(Id);
-alter table Equipamento add foreign key (CidadeId) references Cidade(Id);
+alter table analysis add foreign key (equipment_id) references equipments(id);
+alter table equipments add foreign key (city_id) references cities(id);
 
 

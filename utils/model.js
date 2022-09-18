@@ -25,6 +25,11 @@ class Model {
     );
   }
 
+  async query(sql, params) {
+    const [result] = await database.query(sql, params);
+    return result;
+  }
+
   selectEmail(Email) {
     return database.query(
       `SELECT * FROM ${this.tableName} WHERE Email = ${Email}`

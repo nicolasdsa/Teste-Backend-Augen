@@ -1,13 +1,11 @@
-const equipamentoModel = require("../../models/equipamento");
-const analiseModel = require("../../models/analise");
+const EquipmentController = require("../../controllers/equipment");
+const AnalysisController = require("../../controllers/analysis");
 const ApiError = require("../../utils/apiError");
 
 const route = async (req, res) => {
-  const verify = await equipamentoModel.selectQuery(
-    `WHERE Id = ${req.params.id}`
-  );
+  const analysis = await AnalysisController.findById(req.params.id);
 
-  if (verify[0].length == 0) {
+  if (!analysis) {
     throw ApiError.NotFound("Este equipamento não existe.", {});
   }
 

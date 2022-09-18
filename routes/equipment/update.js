@@ -1,5 +1,5 @@
 const equipamentoModel = require("../../models/equipamento");
-const cidadeModel = require("../../models/cidade");
+const cidadeModel = require("../../models/city");
 const Joi = require("joi");
 const ApiError = require("../../utils/apiError");
 
