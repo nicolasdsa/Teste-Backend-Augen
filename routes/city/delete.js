@@ -16,7 +16,6 @@ const route = async (req, res) => {
 
   const equipments = await EquipmentController.findByCityId(req.params.id);
 
-  console.log(equipments);
 
   if (equipments.length > 0) {
     throw ApiError.badRequest(

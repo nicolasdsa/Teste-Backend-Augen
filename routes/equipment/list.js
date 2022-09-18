@@ -1,9 +1,9 @@
-const equipamentoModel = require("../../models/equipamento");
+const EquipmentController = require("../../controllers/equipment");
 
 const route = async (req, res) => {
-  const list = await equipamentoModel.selectQuery();
+  const list = await EquipmentController.list();
 
-  return res.status(200).send({ ...list[0] });
+  return res.status(200).send({ ...list });
 };
 
 module.exports = route;

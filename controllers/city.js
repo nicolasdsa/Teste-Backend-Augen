@@ -6,7 +6,7 @@ class CityController {
     }
 
     static async list(){
-        const [list] = await cityModel.list();
+        const list = await cityModel.list();
         return list
     }
 

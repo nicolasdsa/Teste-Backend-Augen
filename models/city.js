@@ -13,7 +13,7 @@ class CityModel extends Model {
 
   async list(){
     const sql = `SELECT * FROM ${this.tableName}`;
-    return this.query(sql);
+    return await this.query(sql);
   }
 
   async findById(id){
