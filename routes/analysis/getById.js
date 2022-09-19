@@ -13,7 +13,7 @@ const route = async (req, res) => {
     throw ApiError.NotFound("Esta analise não existe.", {});
   }
 
-  return res.status(200).send( {...analysis} );
+  return res.status(200).send(analysis);
 };
 
 module.exports = {route, paramsSchema};

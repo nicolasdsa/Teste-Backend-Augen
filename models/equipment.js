@@ -30,7 +30,7 @@ class EquipmentModel extends Model {
 
   async deleteById(id){
     const params = [id];
-    const sql = `DELETE FROM ${this.tableName} WHERE id = ?`;
+    const sql = `UPDATE ${this.tableName} SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?`;
     return this.query(sql, params);
   }
 

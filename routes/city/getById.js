@@ -13,7 +13,7 @@ const route = async (req, res) => {
     throw ApiError.NotFound("Esta cidade não existe.", {});
   }
 
-  return res.status(200).send({ city });
+  return res.status(200).send(city);
 };
 
 module.exports = {route, paramsSchema};

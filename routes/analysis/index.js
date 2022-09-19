@@ -5,6 +5,7 @@ const deleteRoute = require("./delete");
 const update = require("./update");
 const list = require("./list");
 const listId = require("./getById");
+const listDate = require("./getByDate");
 const validateMiddleware = require("../../middlewares/validation");
 const routeMiddleware = require("../../middlewares/route");
 const authenticationMiddleware = require("../../middlewares/authentication");
@@ -14,7 +15,6 @@ router.delete("/:id", authenticationMiddleware, validateMiddleware({paramsSchema
 router.put("/:id", authenticationMiddleware, validateMiddleware({bodySchema: update.bodySchema, paramsSchema: update.paramsSchema}), routeMiddleware(update.route));
 router.get("/", routeMiddleware(list));
 router.get("/:id", validateMiddleware({paramsSchema: listId.paramsSchema}), routeMiddleware(listId.route));
-
-
+router.get("/date/:date", validateMiddleware({paramsSchema: listDate.paramsSchema}), routeMiddleware(listDate.route));
 
 module.exports = router;

@@ -14,7 +14,7 @@ const route = async (req, res) => {
     throw ApiError.NotFound("Este equipamento não existe.", {});
   }
 
-  return res.status(200).send({ ...equipment });
+  return res.status(200).send(equipment);
 };
 
 module.exports = {route, paramsSchema};

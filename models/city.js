@@ -28,6 +28,12 @@ class CityModel extends Model {
     return this.query(sql, params);
   }
 
+  async deleteByNameAndState(name, state){
+    const params = [name, state];
+    const sql = `DELETE FROM ${this.tableName} WHERE name = ? AND state = ?`;
+    return this.query(sql, params);
+  } 
+
   async updateById(city, id){
     const params = [city.name, city.state, id];
     const sql = `UPDATE ${this.tableName} SET name = ?, state = ? WHERE id = ?`;

@@ -5,9 +5,9 @@ const ApiError = require("../../utils/apiError");
 
 const bodySchema = Joi.object({
   ph: Joi.number().required(),
-  chlorine: Joi.number().required(),
-  fluorine: Joi.number().required(),
-  output: Joi.number().required(),
+  chlorine: Joi.number().max(100).required(),
+  fluorine: Joi.number().max(100).required(),
+  output: Joi.number().greater(0).required(),
   equipment_id: Joi.number().required(),
 });
 
@@ -17,10 +17,6 @@ const route = async (req, res) => {
 
   if (!equipment) {
     throw ApiError.NotFound("Este equipamento não existe.", {});
-  }
-
-  if (req.body.output == 0 || req.body.chlorine > 100 || req.body.fluorine > 100) {
-    throw ApiError.badRequest("Valores fora do padrão aceito.", {});
   }
 
   const create = await AnalysisController.create(req.body);

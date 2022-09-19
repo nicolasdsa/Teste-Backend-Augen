@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon.js"
+    "start": "set NODE_ENV=dev&& node ./node_modules/nodemon/bin/nodemon.js",
+    "migrate:up": "node ./node_modules/db-migrate/bin/db-migrate up --config ./config/database.json --env ",
+    "test": "set NODE_ENV=test&& node ./node_modules/mocha/bin/mocha ./test/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -18,13 +20,19 @@
   },
   "homepage": "https://github.com/nicolasdsa/Teste-Backend-Augen#readme",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "db-migrate": "^0.11.13",
+    "db-migrate-mysql": "^2.2.0",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.19"
   }
 }

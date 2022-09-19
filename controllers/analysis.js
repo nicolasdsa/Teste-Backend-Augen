@@ -23,6 +23,11 @@ class AnalysisController {
         return analysis
     }
 
+     static async findByDate(year, month, day){
+        const list = await analysisModel.findByDate(year, month, day);
+        return list
+    }
+
     static async deleteById(id){
         return analysisModel.deleteById(id);
     }

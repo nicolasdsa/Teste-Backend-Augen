@@ -2,10 +2,10 @@ const mysql = require("mysql2/promise");
 
 class DataBase {
   constructor() {
-    this.host = "localhost";
-    this.database = "testAugen";
-    this.user = "root";
-    this.password = "#3Lla@76cO3";
+    this.host = process.env.DATABASE_HOST;
+    this.database = process.env.DATABASE_DATABASE;
+    this.user = process.env.DATABASE_USER;
+    this.password = process.env.DATABASE_PASSWORD;
   }
 
   async init() {
@@ -18,6 +18,10 @@ class DataBase {
   }
 
   async query(sql, params) {
+    if(!this.connection){
+      await this.init();
+    }
+
     return await this.connection.execute(sql, params);
   }
 }

@@ -1,3 +1,5 @@
+const env = require("./config/env");
+env(process.env.NODE_ENV);
 const express = require("express");
 const server = express();
 const database = require("./utils/database");
