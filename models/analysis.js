@@ -33,11 +33,18 @@ class AnalysisModel extends Model {
     const sql = `SELECT * FROM ${this.tableName} WHERE DAY(created_at) = ? and MONTH(created_at) = ? and YEAR(created_at) = ?`;
     return this.query(sql, params);
   }
+  
   async deleteById(id){
     const params = [id];
     const sql = `DELETE FROM ${this.tableName} WHERE id = ?`;
     return this.query(sql, params);
   }
+
+  async deleteByTest(analysis){
+    const params = [analysis.ph ,analysis.chlorine, analysis.fluorine, analysis.output, analysis.equipment_id];
+    const sql = `DELETE FROM ${this.tableName} WHERE ph = ? AND chlorine = ? AND fluorine = ? AND output = ? AND equipment_id = ?`;
+    return this.query(sql, params);
+  } 
 
   async updateById(analysis, id){
     const params = [analysis.ph ,analysis.chlorine, analysis.fluorine, analysis.output, analysis.equipment_id, id];

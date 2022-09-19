@@ -34,6 +34,18 @@ class EquipmentModel extends Model {
     return this.query(sql, params);
   }
 
+  async hardDeleteByIdTest(id){
+    const params = [id];
+    const sql = `DELETE FROM ${this.tableName} WHERE id = ?`;
+    return this.query(sql, params);
+  }
+
+  async deleteByNameTest(equipment){
+    const params = [equipment.name, equipment.city_id];
+    const sql = `DELETE FROM ${this.tableName} WHERE name = ? AND city_id = ?`;
+    return this.query(sql, params);
+  } 
+
   async findById(id){
     const params = [id];
     const sql = `SELECT * FROM ${this.tableName} WHERE id = ?`;

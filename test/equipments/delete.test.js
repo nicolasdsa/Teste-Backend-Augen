@@ -2,36 +2,37 @@ const mocha = require("mocha");
 const env = require("../../config/env");
 env(process.env.NODE_ENV);
 const {expect} = require("chai");
-const {route} = require("../../routes/city/getById");
+const {route} = require("../../routes/equipment/delete");
 const cityModel = require("../../models/city");
+const equipmentModel = require("../../models/equipment");
 const Response = require("../utils/res");
 const ApiError = require("../../utils/apiError");
 
-describe("Cities - getById", () => {
-    context("When getting a city by id",  () => {
+describe("Equipments - Delete", () => {
+
+    context("When deleting a equipment by id",  () => {
         let id;
-    
+        let cityId;
+
         before(async () => {
             const result = await cityModel.insert({name: "Pelotas", state: "RS"});
-            id = result.insertId;
+            const equipment = await equipmentModel.insert({name: "equipmentTest", city_id: result.insertId});
+            id = equipment.insertId;
+            cityId = result.insertId
         })
-        it("Should return city data", async () => {
+
+        it("Should return success", async () => {
             const req = {params: {id}};
             const res = new Response();
             await route(req, res);
 
             expect(res.statusNumber).to.be.equals(200);
-            expect(res.body.name).to.be.equals("Pelotas");
-            expect(res.body.state).to.be.equals("RS");
-        })
-        after(async () => {
-            await cityModel.deleteById(id);
-    
+            expect(res.body.success).to.be.true;
         })
     }
     )
 
-    context("When getting a city by invalid id",  () => {    
+    context("When deleting a city by invalid id",  () => {    
     
         it("Should throw ApiError", async () => {
             const req = {params: {id: 999}};
@@ -44,4 +45,5 @@ describe("Cities - getById", () => {
             }   
         })
     })
+
 })
