@@ -43,6 +43,11 @@ npm test
     -db-migrate
     -db-migrate-mysql
 
+## Rotas autenticadas
+Para um maior segurança do suposto projeto foi imaginado que o acesso a api é algo temporario, assim utilizando junto ao jwt, o estilo bearer token no seu metodo de autorização, além é claro da criptografia da senha. Logo para ser um usuario autenticado basta criar uma conta, realizar o login, pegar o token de resposta e no "headers" na key de "Authorization" colocar o valor "Bearer token". Print anexado para facil compreensão. 
+
+![alt text](images/print.png)
+
 ## Endpoints
 
 ### Signup
