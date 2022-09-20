@@ -14,4 +14,3 @@ server.listen(3000, async () => {
 });
 
 server.use("/", routes);
-
