@@ -50,6 +50,7 @@ npm test
 ```
 POST /auth/signup/
 ```
+**Body**
 
 ```json
 {
